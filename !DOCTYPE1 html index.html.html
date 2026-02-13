@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine, Sneha ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ff9a9e, #fecfef);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      text-align: center;
+      max-width: 400px;
+      animation: fadeIn 2s ease-in-out;
+      position: relative;
+      z-index: 10;
+    }
+    h1 {
+      color: #e63946;
+      margin-bottom: 20px;
+    }
+    .heart {
+      font-size: 60px;
+      color: #e63946;
+      animation: heartbeat 1s infinite;
+    }
+    .buttons {
+      margin-top: 30px;
+    }
+    button {
+      margin: 10px;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+      position: relative;
+    }
+    #yesBtn {
+      background: #e63946;
+      color: white;
+    }
+    #yesBtn:hover {
+      background: #d62828;
+      transform: scale(1.1);
+    }
+    #noBtn {
+      background: #6c757d;
+      color: white;
+    }
+    #message {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #6a0572;
+      display: none;
+    }
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.2); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Floating hearts */
+    .floating-heart {
+      position: absolute;
+      font-size: 24px;
+      color: #e63946;
+      animation: floatUp 6s linear infinite;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(1); opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Hi Sneha 💕</h1>
+    <div class="heart">❤️</div>
+    <p>Will you be my Valentine?</p>
+    <div class="buttons">
+      <button id="yesBtn" onclick="sayYes()">Yes 💖</button>
+      <button id="noBtn" onmouseover="runAway()">No 🙈</button>
+    </div>
+    <p id="message">Yay! I knew you’d say yes! 🌹💖</p>
+  </div>
+
+  <!-- Background music -->
+  <audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    function sayYes() {
+      document.getElementById('message').style.display = 'block';
+    }
+
+    function runAway() {
+      const noBtn = document.getElementById('noBtn');
+      const card = document.querySelector('.card');
+      const cardRect = card.getBoundingClientRect();
+
+      const x = Math.random() * (cardRect.width - noBtn.offsetWidth);
+      const y = Math.random() * (cardRect.height - noBtn.offsetHeight);
+
+      noBtn.style.position = 'absolute';
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    }
+
+    // Floating hearts generator
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('floating-heart');
+      heart.innerText = '❤️';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    setInterval(createHeart, 800);
+  </script>
+</body>
+</html>
